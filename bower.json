@@ -6,7 +6,10 @@
 		"warfares"
 	],
 	"description": "Simple library to render/format a JS obj to an HTML view.",
-	"main": "dist/pretty-json.min.js",
+	"main": [
+		"dist/pretty-json.min.js",
+	    "dist/pretty-json.css"
+	],
 	"keywords": [
 		"json",
 		"pretty"
