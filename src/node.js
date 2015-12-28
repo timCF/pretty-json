@@ -6,6 +6,7 @@
 * @version 0.1
 *
 */
+
 PrettyJSON.view.Node = Backbone.View.extend({
     tagName:'span',
     data:null,
@@ -15,18 +16,14 @@ PrettyJSON.view.Node = Backbone.View.extend({
     size:0,
     isLast:true,
     rendered:false,
-    events:{
-        'click .node-bracket': 'collapse',
-        'mouseover .node-container': 'mouseover',
-        'mouseout .node-container': 'mouseout'
-    },
     initialize:function(opt) {
-	this.options = opt;
+
+        this.options = opt;
         this.data = this.options.data;
         this.level = this.options.level || this.level;
         this.path = this.options.path;
         this.isLast = _.isUndefined(this.options.isLast) ?
-            this.isLast : this.options.isLast;
+          this.isLast : this.options.isLast;
         this.dateFormat = this.options.dateFormat;
 
         var m = this.getMeta();
@@ -36,16 +33,13 @@ PrettyJSON.view.Node = Backbone.View.extend({
         //new instance.
         this.childs = [];
         this.render();
-
-        //Render first level.
-        if (this.level == 1)
-            this.show();
+        this.show();
 
     },
     getMeta: function(){
         var val = {
             size: _.size(this.data),
-            type: _.isArray(this.data) ? 'array' : 'object',
+            type: _.isArray(this.data) ? 'array' : 'object'
         };
         return val;
     },
@@ -67,8 +61,6 @@ PrettyJSON.view.Node = Backbone.View.extend({
         this.els.top.html(b.top);
         this.els.down.html(b.bottom);
 
-        this.hide();
-
         return this;
     },
     renderChilds:function(){
@@ -78,9 +70,9 @@ PrettyJSON.view.Node = Backbone.View.extend({
             var isLast = (count == this.size);
             count = count + 1;
 
-            var path = (this.type == 'array') ? 
-                this.path + '[' + key + ']' :
-                this.path + '.' + key;
+            var path = (this.type == 'array') ?
+            this.path + '[' + key + ']' :
+            this.path + '.' + key;
 
             var opt = {
                 key: key,
@@ -92,24 +84,17 @@ PrettyJSON.view.Node = Backbone.View.extend({
                 isLast: isLast
             };
 
-            var child = (PrettyJSON.util.isObject(val) || _.isArray(val) ) ? 
-                new PrettyJSON.view.Node(opt) : 
-                new PrettyJSON.view.Leaf(opt);
+            var child = (PrettyJSON.util.isObject(val) || _.isArray(val) ) ?
+              new PrettyJSON.view.Node(opt) :
+              new PrettyJSON.view.Leaf(opt);
 
-            child.on('mouseover',function(e,path){
-                this.trigger("mouseover",e, path);
-            }, this);
-            child.on('mouseout',function(e){
-                this.trigger("mouseout",e);
-            }, this);
-
-            //body ul 
+            //body ul
             var li = $('<li/>');
-
+            var quotation = '"'
             var colom = '&nbsp;:&nbsp;';
             var left = $('<span />');
             var right =  $('<span />').append(child.el);
-            (this.type == 'array') ? left.html('') : left.html(key + colom);
+            (this.type == 'array') ? left.html('') : left.html(quotation + key + quotation + colom);
 
             left.append(right);
             li.append(left);
@@ -121,15 +106,7 @@ PrettyJSON.view.Node = Backbone.View.extend({
             this.childs.push(child);
 
         }, this);
-    // eof iteration
-    },
-    isVisible:function(){
-        return this.els.contentWrapper.is(":visible");
-    },
-    collapse:function(e){
-        e.stopPropagation();
-        this.isVisible() ? this.hide() : this.show();
-        this.trigger("collapse",e);
+        // eof iteration
     },
     show: function(){
 
@@ -143,39 +120,21 @@ PrettyJSON.view.Node = Backbone.View.extend({
         this.els.contentWrapper.show();
         this.els.down.show();
     },
-    hide: function(){
-        var b = this.getBrackets();
-
-        this.els.top.html(b.close);
-        this.els.contentWrapper.hide();
-        this.els.down.hide();
-    },
     getBrackets:function(){
         var v = {
             top:'{',
-            bottom:'}',
-            close:'{ ... }'
+            bottom:'}'
         };
         if(this.type == 'array'){
             v = {
                 top:'[',
-                bottom:']',
-                close:'[ ... ]'
+                bottom:']'
             };
-        };
+        }
 
         v.bottom = (this.isLast) ? v.bottom : v.bottom + ',';
-        v.close = (this.isLast) ? v.close : v.close + ',';
 
         return v;
-    },
-    mouseover:function(e){
-        e.stopPropagation();
-        this.trigger("mouseover",e, this.path);
-    },
-    mouseout:function(e){
-        e.stopPropagation();
-        this.trigger("mouseout",e);
     },
     expandAll:function (){
         _.each(this.childs, function(child){
@@ -185,16 +144,5 @@ PrettyJSON.view.Node = Backbone.View.extend({
             }
         },this);
         this.show();
-    },
-    collapseAll:function(){
-        _.each(this.childs, function(child){
-            if(child instanceof PrettyJSON.view.Node){
-                child.hide();
-                child.collapseAll();
-            }
-        },this);
-
-        if(this.level != 1)
-            this.hide();
     }
 });

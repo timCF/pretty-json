@@ -6,7 +6,7 @@
 		"warfares"
 	],
 	"description": "Simple library to render/format a JS obj to an HTML view.",
-	"main": "build/pretty-json-min.js",
+	"main": "dist/pretty-json.min.js",
 	"keywords": [
 		"json",
 		"pretty"
@@ -17,7 +17,8 @@
 		"node_modules",
 		"bower_components",
 		"test",
-		"tests"
+		"tests",
+	    "libs"
 	],
 	"dependencies": {
 		"backbone": "~>1.1"
