@@ -2,6 +2,8 @@ PRETTY JSON
 == 
 
 Simple library to render/format a JS obj to an HTML view.
+기존의 pretty-json 소스를 변경하였습니다.
+
 <br/>
 [pretty-json-min.js](http://warfares.github.io/pretty-json/pretty-json-min.js)
 
@@ -13,7 +15,7 @@ This is an [live demo](http://warfares.github.com/pretty-json/)
 Dependecies
 --
 * Backbone 1.1.2 (code structure) 
-* Underscore 1.7.0 
+* lodash 3.9.3
 * JQuery 1.11.1 (DOM manipulation)
 
 Usage
