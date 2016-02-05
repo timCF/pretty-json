@@ -72,7 +72,6 @@ PrettyJSON.view.Node.prototype.renderChilds = function () {
         this.type == "array" ? left.html("") : left.html(quotation + key + quotation + colom);
         left.append(right);
         li.append(left);
-        console.log(child.el,this.el,this.els);
 
         this.els.ul.append(li);
         child.parent = this;
