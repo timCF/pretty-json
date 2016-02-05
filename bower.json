@@ -22,8 +22,5 @@
 		"test",
 		"tests",
 	    "libs"
-	],
-	"dependencies": {
-		"backbone": "~>1.1"
-	}
+	]
 }

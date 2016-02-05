@@ -11,6 +11,6 @@
   "scripts": {
     "build:js": "uglifyjs src/util.js src/tpl.js src/leaf.js src/node.js -o dist/pretty-json.min.js",
     "build:css": "cp css/pretty-json.css dist/pretty-json.css",
-    "build": "mkdir dist && touch dist/pretty-json.min.js && npm run build:js && npm run build:css"
+    "build": "rm -rf dist && mkdir dist && touch dist/pretty-json.min.js && npm run build:js && npm run build:css"
   }
 }
