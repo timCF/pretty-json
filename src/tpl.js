@@ -7,18 +7,18 @@
 *
 **/
 PrettyJSON.tpl.Node = '' +
-'<span class="node-container">' +
+'<div class="node-container">' +
     //top.
     '<span class="node-top node-bracket" />' +
     //content.
-    '<span class="node-content-wrapper">' +
+    '<div class="node-content-wrapper">' +
         '<ul class="node-body" />' +
-    '</span>' +
+    '</div>' +
     //bottom.
     '<span class="node-down node-bracket" />' +
-'</span>';
+'</div>';
 
 PrettyJSON.tpl.Leaf = '' +
-'<span class="leaf-container">' +
+'<div class="leaf-container">' +
     '<span class="<%= type %>"> <%=data%></span><span><%= coma %></span>' +
-'</span>';
+'</div>';

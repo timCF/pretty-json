@@ -50,7 +50,7 @@ PrettyJSON.view.Node.prototype.render = function () {
 };
 PrettyJSON.view.Node.prototype.renderChilds = function () {
     var count = 1;
-    _.each(this.data, function (val, key) {
+    _.forEach(this.data, function (val, key) {
         var isLast = count == this.size;
         count = count + 1;
         var path = this.type == "array" ? this.path + "[" + key + "]" : this.path + "." + key;
@@ -76,7 +76,7 @@ PrettyJSON.view.Node.prototype.renderChilds = function () {
         this.els.ul.append(li);
         child.parent = this;
         this.childs.push(child)
-    }, this)
+    }.bind(this));
 };
 
 PrettyJSON.view.Node.prototype.show = function () {
@@ -97,11 +97,11 @@ PrettyJSON.view.Node.prototype.getBrackets = function () {
     return v
 };
 PrettyJSON.view.Node.prototype.expandAll = function () {
-    _.each(this.childs, function (child) {
+    _.forEach(this.childs, function (child) {
         if (child instanceof PrettyJSON.view.Node) {
             child.show();
             child.expandAll()
         }
-    }, this);
+    }.bind(this));
     this.show()
 };
